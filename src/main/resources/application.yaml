@@ -34,8 +34,25 @@ spring:
         - id: user-service
           uri: lb://USER-SERVICE
           predicates:
-            - Path=/user/**
+            - Path=/user/**,/education/**,/experience/**,/skill/**
+          filters:
+            - FirebaseAuthFilter # Use the bean name in lowercase
         - id: team-service
           uri: lb://TEAM-SERVICE
           predicates:
             - Path=/team/**
+          filters:
+            - FirebaseAuthFilter # Use the bean name in lowercase
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowed-origins: "http://localhost:3000"
+            allowed-methods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+            allowed-headers: "*"
+            allow-credentials: true
+            max-age: 3600
