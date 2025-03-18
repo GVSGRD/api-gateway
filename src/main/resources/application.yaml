@@ -36,13 +36,19 @@ spring:
           predicates:
             - Path=/user/**,/education/**,/experience/**,/skill/**
           filters:
-            - FirebaseAuthFilter # Use the bean name in lowercase
+            - FirebaseAuthFilter
         - id: team-service
           uri: lb://TEAM-SERVICE
           predicates:
             - Path=/team/**,/team-user/**,/techstack/**
           filters:
-            - FirebaseAuthFilter # Use the bean name in lowercase
+            - FirebaseAuthFilter
+        - id: feed-service
+          uri: lb://FEED-SERVICE
+          predicates:
+            - Path=/post/**,/like/**,/comment/**
+          filters:
+            - FirebaseAuthFilter
       globalcors:
         cors-configurations:
           '[/**]':
